@@ -1,0 +1,71 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\3Rd sem\\Data Structure\\Group Project\\SmartParking\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{E52AB2D0-3FEC-4070-B218-5BE2CBE38F54}|SmartParking\\SmartParking.csproj|e:\\3rd sem\\data structure\\group project\\smartparking\\smartparking\\parkingslotdoublylinkedlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E52AB2D0-3FEC-4070-B218-5BE2CBE38F54}|SmartParking\\SmartParking.csproj|solutionrelative:smartparking\\parkingslotdoublylinkedlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E52AB2D0-3FEC-4070-B218-5BE2CBE38F54}|SmartParking\\SmartParking.csproj|e:\\3rd sem\\data structure\\group project\\smartparking\\smartparking\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E52AB2D0-3FEC-4070-B218-5BE2CBE38F54}|SmartParking\\SmartParking.csproj|solutionrelative:smartparking\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E52AB2D0-3FEC-4070-B218-5BE2CBE38F54}|SmartParking\\SmartParking.csproj|e:\\3rd sem\\data structure\\group project\\smartparking\\smartparking\\parkingslotnode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E52AB2D0-3FEC-4070-B218-5BE2CBE38F54}|SmartParking\\SmartParking.csproj|solutionrelative:smartparking\\parkingslotnode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ParkingSlotDoublyLinkedList.cs",
+              "DocumentMoniker": "E:\\3Rd sem\\Data Structure\\Group Project\\SmartParking\\SmartParking\\ParkingSlotDoublyLinkedList.cs",
+              "RelativeDocumentMoniker": "SmartParking\\ParkingSlotDoublyLinkedList.cs",
+              "ToolTip": "E:\\3Rd sem\\Data Structure\\Group Project\\SmartParking\\SmartParking\\ParkingSlotDoublyLinkedList.cs",
+              "RelativeToolTip": "SmartParking\\ParkingSlotDoublyLinkedList.cs",
+              "ViewState": "AgIAAAEBAAAAAAAAAAAAADAAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-02T10:00:27.175Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "E:\\3Rd sem\\Data Structure\\Group Project\\SmartParking\\SmartParking\\Program.cs",
+              "RelativeDocumentMoniker": "SmartParking\\Program.cs",
+              "ToolTip": "E:\\3Rd sem\\Data Structure\\Group Project\\SmartParking\\SmartParking\\Program.cs",
+              "RelativeToolTip": "SmartParking\\Program.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAgwI4AAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-02T08:29:58.768Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ParkingSlotNode.cs",
+              "DocumentMoniker": "E:\\3Rd sem\\Data Structure\\Group Project\\SmartParking\\SmartParking\\ParkingSlotNode.cs",
+              "RelativeDocumentMoniker": "SmartParking\\ParkingSlotNode.cs",
+              "ToolTip": "E:\\3Rd sem\\Data Structure\\Group Project\\SmartParking\\SmartParking\\ParkingSlotNode.cs",
+              "RelativeToolTip": "SmartParking\\ParkingSlotNode.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAAAswB0AAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-02T09:58:20.218Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
