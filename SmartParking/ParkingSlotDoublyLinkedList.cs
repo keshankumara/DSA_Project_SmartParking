@@ -1,11 +1,8 @@
-using System;
-using System.Collections.Generic;
-
 namespace smartparking
 {
     class ParkingSlotDoublyLinkedList
     {
-        private ParkingSlotNode head;
+        private ParkingSlotNode? head;
         int TotalSlotCount = 0;
         int BookingSlotCount = 0;
 
@@ -19,7 +16,7 @@ namespace smartparking
                 if (temp.SlotID == slotID)
                 {
                     // Slot ID already exists
-                    Console.WriteLine($" Slot with ID {slotID} already exists.");
+                    Console.WriteLine($"Slot with ID {slotID} already exists.");
                     return;  // Exit the method, as no new slot will be added
                 }
                 temp = temp.Next;
@@ -75,8 +72,8 @@ namespace smartparking
             middle.Next = null;
             if (nextToMiddle != null) nextToMiddle.Prev = null;
 
-            ParkingSlotNode left = MergeSort(node, sortBy);
-            ParkingSlotNode right = MergeSort(nextToMiddle, sortBy);
+            ParkingSlotNode left  =  MergeSort(node, sortBy);
+            ParkingSlotNode right =  MergeSort(nextToMiddle, sortBy);
 
             return Merge(left, right, sortBy);
         }
@@ -153,7 +150,7 @@ namespace smartparking
                     break;
 
                 default:
-                    throw new ArgumentException(" Invalid sort property");
+                    throw new ArgumentException("Invalid sort property");
             }
 
             return result;
@@ -178,45 +175,35 @@ namespace smartparking
         }
 
         // General Quick Sort method that accepts a comparison type: "id", "distance", or "price"
-        // QuickSort for Linked List
         private ParkingSlotNode QuickSort(ParkingSlotNode node, string sortBy)
         {
-            if (node == null || node.Next == null) return node; // Base case: if the list has 0 or 1 element
+            if (node == null || node.Next == null) return node; // Base case
 
-            // Set the pivot to be the first element in the list
             ParkingSlotNode pivot = node;
             ParkingSlotNode tail = node;
-
-            // Traverse to the tail of the list
-            while (tail.Next != null)
-                tail = tail.Next;
+            while (tail.Next != null) tail = tail.Next;
 
             ParkingSlotNode left = null, right = null, current = node.Next;
 
-            // Partition the list into left and right parts based on comparison with pivot
             while (current != null)
             {
                 ParkingSlotNode next = current.Next;
-
-                if (CompareNodes(current, pivot, sortBy)) // Move smaller elements to the left list
+                if (CompareNodes(current, pivot, sortBy))
                 {
                     current.Next = left;
                     left = current;
                 }
-                else // Move larger elements to the right list
+                else
                 {
                     current.Next = right;
                     right = current;
                 }
-
                 current = next;
             }
 
-            // Recursively sort the left and right parts
             left = QuickSort(left, sortBy);
             right = QuickSort(right, sortBy);
 
-            // Attach the pivot to the sorted left part
             if (left != null)
             {
                 ParkingSlotNode leftTail = left;
@@ -224,88 +211,19 @@ namespace smartparking
                 leftTail.Next = pivot;
             }
 
-            // Attach the right part to the pivot
             pivot.Next = right;
 
-            return left ?? pivot; // If left is null, return pivot as the new head
+            return left ?? pivot;
         }
 
         // Comparison function for sorting based on the property (SlotID, Distance, or Price)
-        private bool CompareNodes(ParkingSlotNode node1, ParkingSlotNode node2, string sortBy)
+        private bool CompareNodes(ParkingSlotNode node1, ParkingSlotNode node2, string sortBy) => sortBy.ToLower(System.Globalization.CultureInfo.CurrentCulture) switch
         {
-            sortBy = sortBy.ToLower(System.Globalization.CultureInfo.CurrentCulture);
-            switch (sortBy)
-            {
-                case "id":
-                    return node1.SlotID <= node2.SlotID;
-                case "distance":
-                    return node1.Distance <= node2.Distance;
-                case "price":
-                    return node1.Price <= node2.Price;
-                default:
-                    throw new ArgumentException(" Invalid sort property");
-            }
-        }
-
-        // QuickSort for List of Nodes
-        public void QuickSort(List<ParkingSlotNode> slots, string sortBy)
-        {
-            QuickSortRecursive(slots, 0, slots.Count - 1, sortBy);
-        }
-
-        private void QuickSortRecursive(List<ParkingSlotNode> slots, int low, int high, string sortBy)
-        {
-            if (low < high)
-            {
-                int pivotIndex = Partition(slots, low, high, sortBy);
-                QuickSortRecursive(slots, low, pivotIndex - 1, sortBy); // Sort the left part
-                QuickSortRecursive(slots, pivotIndex + 1, high, sortBy); // Sort the right part
-            }
-        }
-
-        private int Partition(List<ParkingSlotNode> slots, int low, int high, string sortBy)
-        {
-            var pivot = slots[high];
-            int i = low - 1; // Index of smaller element
-            for (int j = low; j < high; j++)
-            {
-                bool shouldSwap = false;
-
-                // Compare nodes based on the sorting criteria
-                switch (sortBy.ToLower())
-                {
-                    case "id":
-                        if (slots[j].SlotID <= pivot.SlotID) shouldSwap = true;
-                        break;
-                    case "distance":
-                        if (slots[j].Distance <= pivot.Distance) shouldSwap = true;
-                        break;
-                    case "price":
-                        if (slots[j].Price <= pivot.Price) shouldSwap = true;
-                        break;
-                    default:
-                        throw new ArgumentException(" Invalid sort property");
-                }
-
-                if (shouldSwap)
-                {
-                    i++;
-                    Swap(slots, i, j);
-                }
-            }
-
-            Swap(slots, i + 1, high);
-            return i + 1;
-        }
-
-        private void Swap(List<ParkingSlotNode> slots, int i, int j)
-        {
-            var temp = slots[i];
-            slots[i] = slots[j];
-            slots[j] = temp;
-        }
-
-
+            "id" => node1.SlotID <= node2.SlotID,
+            "distance" => node1.Distance <= node2.Distance,
+            "price" => node1.Price <= node2.Price,
+            _ => throw new ArgumentException("Invalid sort property"),
+        };
 
         // Sort slots using Bubble Sort (by SlotID)
         public void BubbleSortSlot_ById()
@@ -383,7 +301,7 @@ namespace smartparking
             return null; // No available slots
         }
 
-
+        
 
         // Remove a vehicle (free up a slot)
         public bool RemoveSlot(int slotID)
@@ -398,7 +316,7 @@ namespace smartparking
                     // Check if the slot is booked
                     if (temp.IsBooked)
                     {
-                        Console.WriteLine(" Slot is currently booked. Cannot remove a booked slot.");
+                        Console.WriteLine("Slot is currently booked. Cannot remove a booked slot.");
                         return false;
                     }
 
@@ -419,13 +337,13 @@ namespace smartparking
                     }
 
                     TotalSlotCount--;  // Decrease the total slot count
-                    Console.WriteLine($" Slot {slotID} has been successfully removed.");
+                    Console.WriteLine($"Slot {slotID} has been successfully removed.");
                     return true;
                 }
                 temp = temp.Next;
             }
 
-            Console.WriteLine(" Slot ID does not exist.");
+            Console.WriteLine("Slot ID does not exist.");
             return false;  // If the slot wasn't found
         }
 
@@ -452,83 +370,92 @@ namespace smartparking
 
         public void UserDisplaySlots()
         {
-            // Check if the head of the list is null (empty list)
-            if (head == null)
+            while (true) // Infinite loop to keep the sorting menu running
             {
-                Console.WriteLine(" No parking slots available.");
-                return;
-            }
-
-            // Ask the user for the sorting criteria
-            Console.WriteLine("");
-            Console.WriteLine(" Sort the parking slots by Distance :");
-            Console.WriteLine(" 1. Merge Sort");
-            Console.WriteLine(" 2. Bubble Sort");
-            Console.WriteLine(" 3. Quick Sort");
-            Console.WriteLine(" 4. Back");
-            Console.WriteLine("");
-            Console.Write(" Enter your choice : ");
-            string choice = Console.ReadLine();
-
-            // Sort the linked list based on user's choice
-            switch (choice)
-            {
-                case "1":
-                    MergeSortSlot_ByDistance();  // Sort by Slot ID
-                    break;
-                case "2":
-                    BubbleSortSlot_ByDistance();  // Sort by Distance
-                    break;
-                case "3":
-                    QuickSortSlot_ByDistance();  // Sort by Price
-                    break;
-                case "44":
-                    return;
-                default:
-                    Console.WriteLine("Invalid choice. Sorting by Distance.");
-                    MergeSortSlot_ByDistance();  // Default to sorting by Distance
-                    break;
-            }
-
-            // Now, display the sorted list
-            ParkingSlotNode temp = head;
-
-            Console.WriteLine("\n    ============================================");
-            Console.WriteLine("    |  Slot ID  |  Distance (m)   |  Status    |");
-            Console.WriteLine("    ============================================");
-
-            while (temp != null)
-            {
-                if (!temp.IsBooked)  // If the slot is available
+                // Check if the head of the list is null (empty list)
+                if (head == null)
                 {
-                    string status = "Available";
-                    Console.WriteLine($"    |    {temp.SlotID,-5}  |     {temp.Distance,-10}  |  {status,-8} |");
+                    Console.WriteLine("No parking slots available.");
+                    return;
                 }
-                temp = temp.Next; // Move to the next node
+
+                // Ask the user for the sorting criteria
+                Console.WriteLine("\n============================================");
+                Console.WriteLine("         Sort the Parking Slots by Distance   ");
+                Console.WriteLine("============================================");
+                Console.WriteLine("1. Merge Sort");
+                Console.WriteLine("2. Bubble Sort");
+                Console.WriteLine("3. Quick Sort");
+                Console.WriteLine("4. Back");
+                Console.WriteLine("============================================");
+                Console.Write("Enter your choice: ");
+                string choice = Console.ReadLine();
+
+                // Sort the linked list based on user's choice
+                switch (choice)
+                {
+                    case "1":
+                        MergeSortSlot_ByDistance();
+                        Console.WriteLine("\nSorted by Distance using Merge Sort.");
+                        break;
+
+                    case "2":
+                        BubbleSortSlot_ByDistance();
+                        Console.WriteLine("\nSorted by Distance using Bubble Sort.");
+                        break;
+
+                    case "3":
+                        QuickSortSlot_ByDistance();
+                        Console.WriteLine("\nSorted by Distance using Quick Sort.");
+                        break;
+
+                    case "4":
+                        //Console.WriteLine("\nReturning to User Menu...");
+                        return; // Exit the sorting menu and go back
+
+                    default:
+                        Console.WriteLine("Invalid choice. Sorting by Distance using Merge Sort.");
+                        MergeSortSlot_ByDistance(); // Default to Merge Sort
+                        break;
+                }
+
+                // Now, display the sorted list
+                ParkingSlotNode temp = head;
+
+                Console.WriteLine("\n====================================================");
+                Console.WriteLine("|  Slot ID  |  Distance (m)   |  Status             |");
+                Console.WriteLine("====================================================");
+
+                while (temp != null)
+                {
+                    string status = temp.IsBooked ? "Booked" : "Available";
+                    Console.WriteLine($"|    {temp.SlotID,-5}  |     {temp.Distance,-10}  |  {status,-18} |");
+                    temp = temp.Next; // Move to the next node
+                }
+
+                Console.WriteLine("====================================================");
+
+                // Optional: Pause before showing the menu again
+                Console.WriteLine("\nPress Enter to continue...");
+                Console.ReadLine();
             }
-
-            //Console.WriteLine("==================================================================================");
         }
-
-
-
 
 
         public void ShowSlots()
         {
             ParkingSlotNode temp = head;
-            Console.WriteLine("");
-            Console.WriteLine("\n  ===============");
-            Console.WriteLine("   |  Slot ID  |  ");
-            Console.WriteLine("  ===============");
-            Console.WriteLine("");
+
+            Console.WriteLine("\n=============");
+            Console.WriteLine("|  Slot ID  |  ");
+            Console.WriteLine("===============");
 
             while (temp != null)
             {
-                Console.WriteLine($"   |    {temp.SlotID,-5}  |");
+                Console.WriteLine($"|    {temp.SlotID,-5}  |");
                 temp = temp.Next;
             }
-            Console.WriteLine(" ");
+            Console.WriteLine("===============");
         }
 
         // Edit the details of an existing parking slot (e.g., distance, price)
@@ -541,19 +468,17 @@ namespace smartparking
             {
                 if (temp.SlotID == slotID)
                 {
-                    Console.WriteLine("");
-                    Console.WriteLine($" Previous Slot --> Slot {slotID} & Distance {temp.Distance}.");
+                    Console.WriteLine($"Previous Slot --> Slot {slotID} & Distance {temp.Distance}.");
                     // Update the slot details
                     temp.Distance = newDistance;
-                    Console.WriteLine($" Slot {slotID} has been updated.");
-                    Console.WriteLine($" After Edit Slot --> Slot {slotID} & New Distance = {newDistance}");
-                    Console.WriteLine("");
+                    Console.WriteLine($"Slot {slotID} has been updated.");
+                    Console.WriteLine($"After Edit Slot --> Slot {slotID} & New Distance = {newDistance}");
                     return true;
                 }
                 temp = temp.Next;
             }
 
-            Console.WriteLine($" Slot ID {slotID} does not exist.");
+            Console.WriteLine($"Slot ID {slotID} does not exist.");
             return false;  // If slot was not found
         }
 
@@ -578,8 +503,7 @@ namespace smartparking
 
 
         // Book a slot for the user (based on SlotID, UserName, VehicleNo, and Duration)
-
-
+       
         // Add a parking slot to the linked list
         public void BookingSlot(int slotID, String UserName, String VehicleNo, double Duration)
         {
@@ -590,34 +514,27 @@ namespace smartparking
                 if (temp.SlotID == slotID)
                 {
                     // Slot ID already exists
-                    Console.WriteLine("");
-                    Console.WriteLine($" You have confirmed the booking of Slot {slotID} .");
+                    Console.WriteLine($"Slot with ID {slotID} already exists.");
                     temp.UserName = UserName;
                     temp.VehicleNo = VehicleNo;
                     temp.Duration = Duration;
                     temp.Price = Duration * 5;
                     temp.IsBooked = true;
 
-                    Console.WriteLine("");
-                    Console.WriteLine("\n   ====== Booking Confirmation ======");
-                    Console.WriteLine("");
-                    Console.WriteLine($"    Name         : {temp.UserName}");
-                    Console.WriteLine($"    Vehicle No   : {temp.VehicleNo}");
-                    Console.WriteLine($"    Slot ID      : {temp.SlotID}");
-                    Console.WriteLine($"    Price        : ${temp.Price}");
-                    Console.WriteLine("");
-                    Console.WriteLine("   ===================================\n");
-                    Console.WriteLine("");
+                    Console.WriteLine("\n====== Booking Confirmation ======");
+                    Console.WriteLine($"Name         : {temp.UserName}");
+                    Console.WriteLine($"Vehicle No   : {temp.VehicleNo}");
+                    Console.WriteLine($"Slot ID      : {temp.SlotID}");
+                    Console.WriteLine($"Price        : ${temp.Price}");
+                    Console.WriteLine("===================================\n");
                     return;  // Exit the method, as no new slot will be added
                 }
-
                 temp = temp.Next;
             }
 
             TotalSlotCount++;  // Increment total slot count
         }
 
-
+        }
     }
-}
 
