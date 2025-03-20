@@ -72,8 +72,8 @@ namespace smartparking
             middle.Next = null;
             if (nextToMiddle != null) nextToMiddle.Prev = null;
 
-            ParkingSlotNode left  =  MergeSort(node, sortBy);
-            ParkingSlotNode right =  MergeSort(nextToMiddle, sortBy);
+            ParkingSlotNode left = MergeSort(node, sortBy);
+            ParkingSlotNode right = MergeSort(nextToMiddle, sortBy);
 
             return Merge(left, right, sortBy);
         }
@@ -301,7 +301,7 @@ namespace smartparking
             return null; // No available slots
         }
 
-        
+
 
         // Remove a vehicle (free up a slot)
         public bool RemoveSlot(int slotID)
@@ -503,7 +503,7 @@ namespace smartparking
 
 
         // Book a slot for the user (based on SlotID, UserName, VehicleNo, and Duration)
-       
+
         // Add a parking slot to the linked list
         public void BookingSlot(int slotID, String UserName, String VehicleNo, double Duration)
         {
@@ -535,6 +535,6 @@ namespace smartparking
             TotalSlotCount++;  // Increment total slot count
         }
 
-        }
     }
+}
 
